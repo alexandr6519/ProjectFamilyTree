@@ -13,7 +13,7 @@ public class Main {
         ArrayList<Human> humans = new ArrayList<>(Arrays.asList(h_1, h_2, h_3, h_4, h_5, h_6, h_7));
 
         FamilyTree familyTree = new FamilyTree();
-        for (Human human : humans) {
+        for (Human human : familyTree) {
             familyTree.addHuman(human);
         }
 
