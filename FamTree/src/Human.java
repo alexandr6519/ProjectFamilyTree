@@ -31,15 +31,6 @@ public class Human implements Serializable, Comparable<Human> {
         this.children = new ArrayList<>();
     }
 
-    public Human( String fullName, Gender gender, Human father, Human mother, int birthYear) {
-        this.fullName = fullName;
-        this.gender = gender;
-        this.father = null;
-        this.mother = null;
-        this.birthYear = birthYear;
-        this.children = new ArrayList<>();
-    }
-
     @Override
     public String toString() {
         return String.format("id : %d; полное имя: %s; год рождения: %d;\n ", this.id, this.fullName, this.birthYear);
