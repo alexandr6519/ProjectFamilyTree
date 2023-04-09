@@ -15,16 +15,16 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        FamilyTree familyTree_2 = new FamilyTree();
-        familyTree_2.createInitialFamilyTree();
-        familyTree_2.getInfoAboutFamilyTree();
+        FamilyTree familyTree = new FamilyTree();
+        familyTree.createInitialFamilyTree();
+        familyTree.getInfoAboutFamilyTree();
 
         FileHandler fh = new FileHandler("familyTree", "out");
-        fh.writeTreeInFile(familyTree_2);
+        fh.writeTreeInFile(familyTree);
 
-        familyTree_2 = fh.readFromFile();
+        familyTree = fh.readFromFile();
         System.out.println("Генеалогическое древо, прочитанное из файла:");
-        familyTree_2.getInfoAboutFamilyTree();
+        familyTree.getInfoAboutFamilyTree();
 
         Scanner scn = new Scanner(System.in);
         printInvitationForUser();
@@ -35,47 +35,47 @@ public class Main {
                 break;
             }
             if (operationNumber == 1) {
-                familyTree_2.createInitialFamilyTree();
-                familyTree_2.getInfoAboutFamilyTree();
+                familyTree.createInitialFamilyTree();
+                familyTree.getInfoAboutFamilyTree();
                 printInvitationForUser();
             } else if (operationNumber == 2) {
-                fh.writeTreeInFile(familyTree_2);
+                fh.writeTreeInFile(familyTree);
                 System.out.println("Вы успешно сохранили в файл список генеалогического древа!");
-                familyTree_2.getInfoAboutFamilyTree();
+                familyTree.getInfoAboutFamilyTree();
                 printInvitationForUser();
             } else if (operationNumber == 3) {
                 System.out.println("Генеалогическое древо, прочитанное из файла:");
-                familyTree_2.getInfoAboutFamilyTree();
+                familyTree.getInfoAboutFamilyTree();
                 printInvitationForUser();
             } else if (operationNumber == 4) {
                 System.out.println("Для сортировки по имени введите цифру 1:\n" +
                         "для сортировки по году рождения введите цифру 2: \n" +
                         "для сортировки по id введите цифру 3:");
                 int sortNumber = scn.nextInt();
-                FamilyTree familyTree_sort = familyTree_2;
+
                 switch (sortNumber) {
                     case 1:
                         System.out.println("Генеалогическое древо, отсортированное по имени:");
-                        familyTree_sort.sortByName();
+                        familyTree.sortByName();
                         break;
                     case 2:
                         System.out.println("Генеалогическое древо, отсортированное по году рождения:");
-                        familyTree_sort.sortByBirthday();
+                        familyTree.sortByBirthday();
                         break;
                     case 3:
                         System.out.println("Генеалогическое древо, отсортированное по Id:");
-                        familyTree_sort.sortById();
+                        familyTree.sortById();
                         break;
                     default:
                         System.out.println("Вы ввели некорректный номер сортировки!");
                 }
-                familyTree_sort.getInfoAboutFamilyTree();
+                familyTree.getInfoAboutFamilyTree();
                 printInvitationForUser();
             }  else {
                 System.out.println("Вы ввели некорректный номер операции!");
                 printInvitationForUser();
             }
         }
-        familyTree_2.printChildren();
+        familyTree.printChildren();
     }
 }
