@@ -10,7 +10,6 @@ public class Main {
                 " 2 - для записи и сохранения списка родственников древа \n" +
                 " 3 - для чтения и получения списка родственников из файла \n" +
                 " 4 - для сортировки списка родственников по выбранному параметру \n" +
-                " 5 - для добавления родственника в список древа \n" +
                 " 0 - для выхода из меню \n";
         System.out.println(str);
     }
@@ -72,58 +71,11 @@ public class Main {
                 }
                 familyTree_sort.getInfoAboutFamilyTree();
                 printInvitationForUser();
-            } else if (operationNumber == 5) {
-                System.out.println("Для добавления в список введите последовательно : " +
-                        "имя, пол (м или ж), id отца, id матери, год рождения, количество детей, id детей" +
-                        "(в случае отсутствия id введите -1");
-                String humanForAdding = scn.next();
-                String [] arrayDataOfHuman = humanForAdding.split(",");
-            } else {
+            }  else {
                 System.out.println("Вы ввели некорректный номер операции!");
                 printInvitationForUser();
             }
         }
-
         familyTree_2.printChildren();
-
-
-
-       /* while (scn.hasNextInt()) {
-            int operationNumber = scn.nextInt();
-            if (operationNumber == 0) {
-                System.out.println("Всего доброго!");
-                break;
-            }
-        }
-            switch (operationNumber) {
-                case 1:
-                    familyTree = familyTree.createInitialFamilyTree();
-                    System.out.println("Вы успешно создали список генеалогического древа!");
-                    System.out.println(familyTree);
-                    printInvitationForUser();
-                    break;
-                case 2:
-                    if (familyTree.isEmpty()) {
-                        fh.writeTreeInFile(familyTree);
-                        System.out.println("Вы успешно сохранили список генеалогического древа!");
-                        System.out.println(familyTree);
-                        printInvitationForUser();
-                    } else {
-                        System.out.println("Список не сохранен из-за отсутствия данных для записи!!!");
-                    }
-                    break;
-                case 3:
-                    familyTree = fh.readFromFile();
-                    System.out.println(familyTree);
-                    familyTree.printChildren();
-                    printInvitationForUser();
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Вы ввели некорректный номер операции!");
-                    printInvitationForUser();
-            }
-        }*/
     }
 }
