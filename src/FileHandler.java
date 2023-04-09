@@ -1,18 +1,28 @@
 import java.io.*;
 
-public class FileHandler implements Serializable {
-    public void writeInFile(String fileName, String fileType, FamilyTree list) throws IOException {
+public class FileHandler implements Writable, Readable {
+    private String fileName;
+    private String fileType;
+
+    public FileHandler(String fileName, String fileType){
+        this.fileName = fileName;
+        this.fileType = fileType;
+    }
+
+    @Override
+    public void writeTreeInFile(FamilyTree object) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream(fileName + "." + fileType));
-        objectOutputStream.writeObject(list);
+        objectOutputStream.writeObject(object);
         objectOutputStream.close();
     }
 
-    public FamilyTree readFromFile(String fileName, String fileType) throws IOException, ClassNotFoundException {
+    @Override
+    public FamilyTree readFromFile() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream(fileName + "." + fileType));
-        FamilyTree myTree = (FamilyTree) objectInputStream.readObject();
+        FamilyTree object = (FamilyTree) objectInputStream.readObject();
         objectInputStream.close();
-        return myTree;
+        return object;
     }
 }
