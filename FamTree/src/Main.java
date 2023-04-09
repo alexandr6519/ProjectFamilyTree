@@ -37,6 +37,7 @@ public class Main {
             if (operationNumber == 1) {
                 familyTree.createInitialFamilyTree();
                 familyTree.getInfoAboutFamilyTree();
+                familyTree.printChildren();
                 printInvitationForUser();
             } else if (operationNumber == 2) {
                 fh.writeTreeInFile(familyTree);
@@ -46,6 +47,7 @@ public class Main {
             } else if (operationNumber == 3) {
                 System.out.println("Генеалогическое древо, прочитанное из файла:");
                 familyTree.getInfoAboutFamilyTree();
+                familyTree.printChildren();
                 printInvitationForUser();
             } else if (operationNumber == 4) {
                 System.out.println("Для сортировки по имени введите цифру 1:\n" +
@@ -76,6 +78,5 @@ public class Main {
                 printInvitationForUser();
             }
         }
-        familyTree.printChildren();
     }
 }
