@@ -16,16 +16,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         FamilyTree familyTree = new FamilyTree();
-        familyTree.createInitialFamilyTree();
-        familyTree.getInfoAboutFamilyTree();
-
+       
         FileHandler fh = new FileHandler("familyTree", "out");
-        fh.writeTreeInFile(familyTree);
-
-        familyTree = fh.readFromFile();
-        System.out.println("Генеалогическое древо, прочитанное из файла:");
-        familyTree.getInfoAboutFamilyTree();
-
+        
         Scanner scn = new Scanner(System.in);
         printInvitationForUser();
         while (scn.hasNextInt()) {
