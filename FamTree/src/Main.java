@@ -10,15 +10,22 @@ public class Main {
                 " 2 - для записи и сохранения списка родственников древа \n" +
                 " 3 - для чтения и получения списка родственников из файла \n" +
                 " 4 - для сортировки списка родственников по выбранному параметру \n" +
+                " 5 - для добавления родственника в список древа \n" +
                 " 0 - для выхода из меню \n";
         System.out.println(str);
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        FamilyTree familyTree = new FamilyTree();
-       
+       FamilyTree familyTree = new FamilyTree();
+       /*  familyTree.createInitialFamilyTree();
+        familyTree.getInfoAboutFamilyTree();
+        FamilyTree familyTree = fh.readFromFile();
+        System.out.println("Генеалогическое древо, прочитанное из файла:");
+        familyTree.getInfoAboutFamilyTree();
+        fh.writeTreeInFile(familyTree);*/
+
         FileHandler fh = new FileHandler("familyTree", "out");
-        
+
         Scanner scn = new Scanner(System.in);
         printInvitationForUser();
         while (scn.hasNextInt()) {
@@ -30,7 +37,6 @@ public class Main {
             if (operationNumber == 1) {
                 familyTree.createInitialFamilyTree();
                 familyTree.getInfoAboutFamilyTree();
-                familyTree.printChildren();
                 printInvitationForUser();
             } else if (operationNumber == 2) {
                 fh.writeTreeInFile(familyTree);
@@ -40,7 +46,6 @@ public class Main {
             } else if (operationNumber == 3) {
                 System.out.println("Генеалогическое древо, прочитанное из файла:");
                 familyTree.getInfoAboutFamilyTree();
-                familyTree.printChildren();
                 printInvitationForUser();
             } else if (operationNumber == 4) {
                 System.out.println("Для сортировки по имени введите цифру 1:\n" +
@@ -66,10 +71,25 @@ public class Main {
                 }
                 familyTree.getInfoAboutFamilyTree();
                 printInvitationForUser();
-            }  else {
+            } else if (operationNumber == 5) {
+                System.out.println("Для добавления в список введите последовательно через запятую(без пробелов): " +
+                        "фамилия, имя, отчество, пол (м или ж), id отца, id матери, год рождения" +
+                        "(в случае отсутствия id введите -1");
+                String humanForAdding = scn.next();
+                String [] arrayDataOfHuman = humanForAdding.split("[,]");
+
+                String nameFull = String.format("%s %s %s",arrayDataOfHuman[0], arrayDataOfHuman[1], arrayDataOfHuman[2]);
+                Human father = familyTree.getHumanById(Integer.parseInt(arrayDataOfHuman[4]));
+                Human mother = familyTree.getHumanById(Integer.parseInt(arrayDataOfHuman[5]));
+                int birthYear = Integer.parseInt(arrayDataOfHuman[6]);
+                int id = familyTree.getLastId() + 1;
+                Human humanNew = new Human(id, nameFull, familyTree.getGender(arrayDataOfHuman[3]), father, mother, birthYear);
+                familyTree.addHuman(humanNew);
+                familyTree.getInfoAboutFamilyTree();
+                familyTree.printChildren();
+            }
+            else {
                 System.out.println("Вы ввели некорректный номер операции!");
                 printInvitationForUser();
             }
         }
-    }
-}
