@@ -3,12 +3,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree<H extends Human> implements Serializable {
     private int id;
-    private List<Human> familyTree;
+    private List<H> familyTree;
 
+    public int getLastId(){
+        return this.familyTree.size() - 1;
+    }
+    public int getId() {
+        return id;
+    }
     public FamilyTree() {
-        this.familyTree = new ArrayList<>();
+        this.familyTree = new ArrayList<H>();
     }
 
     public void createInitialFamilyTree() {
@@ -28,7 +34,7 @@ public class FamilyTree implements Serializable {
         this.familyTree = familyTree_1.getFamilyTree();
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(H human) {
         this.familyTree.add(human);
         if (human.getMother() != null) {
             human.getMother().addChild(human);
@@ -46,8 +52,14 @@ public class FamilyTree implements Serializable {
         }
     }
 
-    public Human getHumanById(int id){
-        for (Human human: this.familyTree) {
+    public Gender getGender(String g) {
+        if (g.equals("м")){
+            return Gender.male;
+        }
+        return Gender.female;
+    }
+    public H getHumanById(int id){
+        for (H human: this.familyTree) {
             if (human.getId() == id){
                 return human;
             }
@@ -58,7 +70,7 @@ public class FamilyTree implements Serializable {
     public void printChildren() {
         System.out.println("Список генеалогического древа с указанием наличия (отсутствия) детей:");
         int index = 1;
-        for (Human humanTemp : familyTree) {
+        for (H humanTemp : familyTree) {
             if (humanTemp.getChildren().isEmpty()) {
                 System.out.printf("%d)%s (%d) не имеет детей!\n ", index++, humanTemp.getFullName(), humanTemp.getBirthYear());
                 System.out.println();
@@ -80,7 +92,7 @@ public class FamilyTree implements Serializable {
     public void sortById() {
         this.familyTree.sort(new HumanComparatorById());
     }
-    public List<Human> getFamilyTree() {
+    public List<H> getFamilyTree() {
         return familyTree;
     }
 }

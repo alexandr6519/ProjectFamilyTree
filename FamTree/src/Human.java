@@ -34,10 +34,17 @@ public class Human implements Serializable, Comparable<Human> {
     public Human( String fullName, Gender gender, Human father, Human mother, int birthYear) {
         this.fullName = fullName;
         this.gender = gender;
-        this.father = null;
-        this.mother = null;
+        this.father = father;
+        this.mother = mother;
         this.birthYear = birthYear;
         this.children = new ArrayList<>();
+    }
+
+    public Gender getGender(String g) {
+        if (g.equals("м")){
+            return Gender.male;
+        }
+        return Gender.female;
     }
 
     @Override
